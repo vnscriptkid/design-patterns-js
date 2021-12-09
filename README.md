@@ -1,5 +1,8 @@
 ## Hello
 
+#### SOLID
+* Single Responsibility
+
 #### Creational
 * Builder
 * Factories
