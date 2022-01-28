@@ -1,0 +1,15 @@
+{
+  "name": "design-patterns-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:vnscriptkid/design-patterns-js.git",
+  "author": "Thanh Nguyen <vnscriptkid@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "ts": "ts-node-dev"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  }
+}
