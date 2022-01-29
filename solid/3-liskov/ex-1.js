@@ -31,20 +31,14 @@ class Square extends Rectangle {
   constructor(size) {
     super(size, size);
   }
-
-  set width(value) {
-    this._width = this._height = value;
-  }
-
-  set height(value) {
-    this._width = this._height = value;
-  }
 }
 
 let useIt = function (rc) {
   let width = rc._width;
   rc.height = 10;
-  console.log(`Expected area of ${10 * width}, ` + `got ${rc.area}`);
+  console.log(
+    `${rc.constructor.name} | height: ${rc.height}, width: ${rc.width} | area: ${rc.area}`
+  );
 };
 
 let rc = new Rectangle(2, 3);
