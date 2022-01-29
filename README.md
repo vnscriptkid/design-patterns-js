@@ -3,9 +3,9 @@
 #### SOLID
 * ⭐⭐⭐⭐⭐ Single Responsibility
 * ⭐⭐⭐⭐⭐ Open for extensions, closed for modifications
-* ⭐🌑🌑🌑🌑 Liskov substitution
-* ⭐🌑🌑🌑🌑 Interface segregation 
-* ⭐🌑🌑🌑🌑 Dependency Inversion
+* ⭐⭐⭐⭐⭐ Liskov substitution
+* ⭐⭐⭐⭐⭐ Interface segregation 
+* ⭐⭐⭐⭐⭐ Dependency Inversion
 
 #### Creational
 * Builder
