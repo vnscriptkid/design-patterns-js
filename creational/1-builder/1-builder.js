@@ -3,25 +3,27 @@ class Tag {
     return 2;
   }
 
-  constructor(name = "", text = "") {
+  constructor(name = "", children = "") {
     this.name = name;
-    this.text = text;
-    this.children = [];
+    this.children = children;
   }
 
   toStringImpl(indent) {
     let html = [];
-    let i = " ".repeat(indent * Tag.indentSize);
-    html.push(`${i}<${this.name}>\n`);
-    if (this.text.length > 0) {
+    let spaces = " ".repeat(indent * Tag.indentSize);
+    html.push(`${spaces}<${this.name}>\n`);
+    if (typeof this.children === "string") {
       html.push(" ".repeat(Tag.indentSize * (indent + 1)));
       html.push(this.text);
       html.push("\n");
+    } else if (Array.isArray(this.children)) {
+      for (let child of this.children)
+        html.push(child.toStringImpl(indent + 1));
+    } else {
+      throw new Error(`Type of children should be string or array.`);
     }
 
-    for (let child of this.children) html.push(child.toStringImpl(indent + 1));
-
-    html.push(`${i}</${this.name}>\n`);
+    html.push(`${spaces}</${this.name}>\n`);
     return html.join();
   }
 
