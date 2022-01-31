@@ -32,3 +32,14 @@ class Point {
 // expected api
 Point.newCartesianPoint(2, 3);
 Point.newPolarPoint(5, Math.PI / 2);
+
+// too much responsibility for Point class?
+// make it less!
+// expected api
+PointFactory.newCartesianPoint(2, 3);
+PointFactory.newPolarPoint(5, Math.PI / 2);
+
+// too many classes to remember? can we integrate it?
+// expected api
+Point.factory.newCartesianPoint(2, 3);
+Point.factory.newPolarPoint(5, Math.PI / 2);
