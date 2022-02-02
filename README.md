@@ -8,12 +8,12 @@
 * ⭐⭐⭐⭐⭐ Dependency Inversion
 
 #### Creational
-* Builder
-* Factories
+* ⭐⭐⭐⭐⭐ Builder
+* ⭐⭐⭐⭐⭐ Factories
   * Abstract Factory
   * Factory Method
-* Prototype
-* Singleton
+* ⭐⭐⭐⭐⭐ Prototype
+* ⭐⭐⭐⭐⭐ Singleton
 
 #### Structural
 * Adaptor
