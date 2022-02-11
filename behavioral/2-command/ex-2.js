@@ -31,15 +31,22 @@ class BankAccountCommand {
   // what account on which this command operates
   // what action that this command does (action type)
   // how much money is this command
+  // status of command: successful or failed (used for undo)
   /*****/
-  // todo: implement call() that executes this command
+  // todo: implement call() that executes this command, record command state
   // 2 cases:
   // deposit
   // withdraw
+  /*****/
+  // todo: implement undo() that undo a successfull command
 }
 
 let ba = new BankAccount(100);
 
 let cmd = new BankAccountCommand(ba, Action.deposit, 50);
 cmd.call();
+console.log(ba.toString());
+
+console.log("Performing undo:");
+cmd.undo();
 console.log(ba.toString());
