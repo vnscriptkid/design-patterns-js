@@ -29,9 +29,9 @@
 
 #### Behavioral
 
-- Chain of Responsibility
-- Command
-- Interpreter
+- ⭐⭐⭐⭐⭐ Chain of Responsibility
+- ⭐⭐⭐⭐⭐ Command
+- ⭐⭐⭐⭐⭐ Interpreter
 - Iterator
 - Mediator
 - Memento
