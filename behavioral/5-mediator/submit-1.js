@@ -1,6 +1,9 @@
 class Person {
   constructor(name) {
     // todo: his name, chatLog is a list of received messages, room is the room he joined.
+    this.name = name;
+    this.chatLog = [];
+    this.room = null;
   }
 
   receive(sender, message) {
@@ -10,11 +13,14 @@ class Person {
   }
 
   say(message) {
+    // assuming person has already joined the room
     // todo: broadcast to current rom
+    this.room.broadcast(this.name, message);
   }
 
   pm(who, message) {
     // send message in current room from current person to someone with msg content
+    this.room.message(this.name, who, message);
   }
 }
 
@@ -22,9 +28,12 @@ class Person {
 class ChatRoom {
   constructor() {
     // todo: keeps a list of persons
+    this.people = [];
   }
 
   broadcast(source, message) {
+    for (let p of this.people)
+      if (p.name !== source) p.receive(source, message);
     // everyone in chatroom should receive message from source, except for the one who sends it
   }
 
@@ -32,13 +41,21 @@ class ChatRoom {
     let joinMsg = `${p.name} joins the chat`;
 
     // todo: broadcast joinMsg to room
+    this.broadcast("room", joinMsg);
     // attach room to newly joined person
+    p.room = this;
     // add person to chat room
+    this.people.push(p);
   }
 
   message(source, destination, message) {
     // find the person with same name as dest
     // let him receive message only
+    const destPerson = this.people.find((p) => p.name === destination);
+
+    if (!destPerson) return;
+
+    destPerson.receive(source, message);
   }
 }
 
