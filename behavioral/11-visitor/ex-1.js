@@ -1,4 +1,8 @@
-/* Intrusive visitor */
+/* Intrusive visitor 
+!! problems:
+1) separation of concerns (expression handles printing work)
+2) open-closed (modifying existing classes)
+*/
 
 class NumberExpression {
   constructor(value) {
