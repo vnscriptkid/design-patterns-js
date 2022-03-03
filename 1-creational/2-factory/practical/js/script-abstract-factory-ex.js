@@ -1,31 +1,30 @@
 (function (win, $) {
-  function RedCircle() {}
-
-  RedCircle.prototype.create = function () {
-    this.item = $('<div class="circle"></div>');
-    return this;
-  };
-
-  function BlueCircle() {}
-
-  BlueCircle.prototype.create = function () {
-    this.item = $('<div class="circle" style="background-color: blue;"></div>');
-    return this;
-  };
-
-  var CircleFactory = function () {
-    this.types = {};
-
-    this.create = function (type) {
-      return new this.types[type]().create();
+  // todo: i want to be able to create circle in a more dynamic way
+  var RedCircle = function () {
+      this.item = $('<div class="circle"></div>');
+    },
+    BlueCircle = function () {
+      this.item = $(
+        '<div class="circle" style="background-color: blue;"></div>'
+      );
+    },
+    CircleFactory = function () {
+      // problem: every time i want to add new variation of circle, i need to modify the factory directly (violates open-closed)
+      // todo: it's great if can add new variation outside through something like `factory.register(type, cls)`
+      // hint: keep a internal mapping between `type` and `cls`
+      this.create = function (type) {
+        // todo: these logic must be moved out
+        // todo: check type and find matching cls
+        // todo: cls must implement certain interface
+        if (color === "red") {
+          return new RedCircle().item;
+        } else if (color === "blue") {
+          return new BlueCircle().item;
+        } else {
+          throw new Error("Unsupported color.");
+        }
+      };
     };
-    this.register = function (type, cls) {
-      if (cls.prototype.create) {
-        console.log("Registered: ", type, cls);
-        this.types[type] = cls;
-      }
-    };
-  };
 
   var CircleGeneratorSingleton = (function () {
     var instance;
@@ -35,11 +34,8 @@
         _stage = $(".advert"),
         _circleFactory = new CircleFactory();
 
-      _circleFactory.register("red", RedCircle);
-      _circleFactory.register("blue", BlueCircle);
-
       function create(x, y, color = "red") {
-        var circle = _circleFactory.create(color).item;
+        var circle = _circleFactory.create(color);
         _position(circle, x, y);
         return circle;
       }
