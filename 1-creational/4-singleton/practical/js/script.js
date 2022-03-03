@@ -6,20 +6,20 @@
       var _allCircles = [],
         _stage = $(".advert");
 
-      function create(left, top) {
+      function create(x, y) {
         var circle = $('<div class="circle"></div>');
-        _position(circle, left, top);
+        _position(circle, x, y);
         return circle;
       }
 
-      function _position(circle, left, top) {
-        circle.css("left", left);
-        circle.css("top", top);
+      function _position(circle, x, y) {
+        circle.css("left", x);
+        circle.css("top", y);
       }
 
       function add(circle) {
-        _stage.append(circle);
         _allCircles.push(circle);
+        _stage.append(circle);
         console.log(_allCircles);
       }
 
@@ -40,20 +40,23 @@
 
   $(win.document).ready(function () {
     $(".advert").click(function (e) {
-      //   var circle = $('<div class="circle"></div>');
-      //   circle.css("left", e.pageX - 25);
-      //   circle.css("top", e.pageY - 25);
-      //   $(".advert").append(circle);
-      const generator = CircleGeneratorSingleton.getInstance();
-      var circle = generator.create(e.pageX - 25, e.pageY - 25);
-      generator.add(circle);
+      // var circle = $('<div class="circle"></div>');
+      // circle.css("left", e.pageX - 25);
+      // circle.css("top", e.pageY - 25);
+      // $(".advert").append(circle);
+      var circleGenerator = CircleGeneratorSingleton.getInstance();
+      var circle = circleGenerator.create(e.pageX - 25, e.pageY - 25);
+      circleGenerator.add(circle);
     });
 
     $(document).keypress(function (e) {
       if (e.key === "a") {
-        const generator = CircleGeneratorSingleton.getInstance();
-        var circle = generator.create(Math.random() * 600, Math.random() * 600);
-        generator.add(circle);
+        var circleGenerator = CircleGeneratorSingleton.getInstance();
+        var circle = circleGenerator.create(
+          Math.random() * 600,
+          Math.random() * 600
+        );
+        circleGenerator.add(circle);
       }
     });
   });
