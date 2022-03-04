@@ -1,36 +1,21 @@
 (function (win, $) {
   var CircleFactory = function () {
-    this.types = {}; // { type: cls }, exp: { red: RedCircle }
-
-    this.create = function (type = "red") {
-      if (type in this.types) {
-        return new this.types[type]().create();
-      }
-      console.log(type + " is not registered yet!");
-      return {};
+      this.create = function (type = "red") {
+        if (type === "red") {
+          return new RedCircle();
+        } else if (type === "blue") {
+          return new BlueCircle();
+        } else {
+          throw new Error("Unsupported type of circle");
+        }
+      };
+    },
+    RedCircle = function () {
+      return $('<div class="circle"></div>');
+    },
+    BlueCircle = function () {
+      return $('<div class="circle" style="background-color: blue;"></div>');
     };
-
-    this.register = function (type, cls) {
-      // expect cls has .create() method
-      if ("create" in cls.prototype) {
-        this.types[type] = cls;
-      } else {
-        throw new Error(cls + " must contain create method!");
-      }
-    };
-  };
-  function RedCircle() {}
-  RedCircle.prototype.create = function () {
-    return $('<div class="circle"></div>');
-  };
-  function BlueCircle() {}
-  BlueCircle.prototype.create = function () {
-    return $('<div class="circle" style="background-color: blue;"></div>');
-  };
-  function GreenCircle() {}
-  GreenCircle.prototype.create = function () {
-    return $('<div class="circle" style="background-color: green;"></div>');
-  };
 
   var CircleGeneratorSingleton = (function () {
     var instance;
@@ -40,12 +25,7 @@
         _stage = $(".advert"),
         _circleFactory = new CircleFactory();
 
-      _circleFactory.register("red", RedCircle);
-      _circleFactory.register("blue", BlueCircle);
-      _circleFactory.register("green", GreenCircle);
-
       function create(x, y, color) {
-        // var circle = $('<div class="circle"></div>');
         var circle = _circleFactory.create(color);
         _position(circle, x, y);
         return circle;
@@ -84,7 +64,7 @@
       // circle.css("top", e.pageY - 25);
       // $(".advert").append(circle);
       var circleGenerator = CircleGeneratorSingleton.getInstance();
-      var circle = circleGenerator.create(e.pageX - 25, e.pageY - 25, "red");
+      var circle = circleGenerator.create(e.pageX - 25, e.pageY - 25);
       circleGenerator.add(circle);
     });
 
@@ -95,14 +75,6 @@
           Math.random() * 600,
           Math.random() * 600,
           "blue"
-        );
-        circleGenerator.add(circle);
-      } else if (e.key === "b") {
-        var circleGenerator = CircleGeneratorSingleton.getInstance();
-        var circle = circleGenerator.create(
-          Math.random() * 600,
-          Math.random() * 600,
-          "green"
         );
         circleGenerator.add(circle);
       }
